@@ -1,0 +1,10 @@
+C:\Users\Kyle\Documents\GitHub\Wiki-Prototype-Application\Wiki Prototype Application\bin\Debug\Wiki Prototype Application.exe.config
+C:\Users\Kyle\Documents\GitHub\Wiki-Prototype-Application\Wiki Prototype Application\bin\Debug\Wiki Prototype Application.exe
+C:\Users\Kyle\Documents\GitHub\Wiki-Prototype-Application\Wiki Prototype Application\bin\Debug\Wiki Prototype Application.pdb
+C:\Users\Kyle\Documents\GitHub\Wiki-Prototype-Application\Wiki Prototype Application\obj\Debug\Wiki Prototype Application.csproj.AssemblyReference.cache
+C:\Users\Kyle\Documents\GitHub\Wiki-Prototype-Application\Wiki Prototype Application\obj\Debug\Wiki_Prototype_Application.WikiPrototypeApplication.resources
+C:\Users\Kyle\Documents\GitHub\Wiki-Prototype-Application\Wiki Prototype Application\obj\Debug\Wiki_Prototype_Application.Properties.Resources.resources
+C:\Users\Kyle\Documents\GitHub\Wiki-Prototype-Application\Wiki Prototype Application\obj\Debug\Wiki Prototype Application.csproj.GenerateResource.cache
+C:\Users\Kyle\Documents\GitHub\Wiki-Prototype-Application\Wiki Prototype Application\obj\Debug\Wiki Prototype Application.csproj.CoreCompileInputs.cache
+C:\Users\Kyle\Documents\GitHub\Wiki-Prototype-Application\Wiki Prototype Application\obj\Debug\Wiki Prototype Application.exe
+C:\Users\Kyle\Documents\GitHub\Wiki-Prototype-Application\Wiki Prototype Application\obj\Debug\Wiki Prototype Application.pdb
