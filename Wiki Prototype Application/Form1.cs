@@ -51,6 +51,7 @@ namespace Wiki_Prototype_Application
             {
                 statusStripOne.Text = "The array is full, delete a wiki entry and try again.";
             }
+            displayArray();
         }
 
         // Delete button method
@@ -61,6 +62,7 @@ namespace Wiki_Prototype_Application
                 int deleteIndex = listBoxOne.SelectedIndex;
                 String[,] copyArray = wikiArray;
                 int deleteCounter = 0;
+                counter--;
 
                 for (int i = 0; i < row; i++)
                 {
@@ -87,14 +89,16 @@ namespace Wiki_Prototype_Application
             {
 
             }
+            displayArray();
         }
         public void displayArray()
         {
             listBoxOne.Items.Clear();
             string idk = "";
-            for(int x = 0; x<row; x++ +)
+            for(int x = 0; x<row; x++)
             {
-
+                idk = wikiArray[x, 0] + "\t" + wikiArray[x, 1] + "\t" + wikiArray[x, 2];
+                listBoxOne.Items.Add(idk);
             }
 
         }
