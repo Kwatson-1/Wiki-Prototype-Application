@@ -8,3 +8,14 @@ C:\Users\Kyle\Documents\GitHub\Wiki-Prototype-Application\Wiki Prototype Applica
 C:\Users\Kyle\Documents\GitHub\Wiki-Prototype-Application\Wiki Prototype Application\obj\Debug\Wiki Prototype Application.csproj.CoreCompileInputs.cache
 C:\Users\Kyle\Documents\GitHub\Wiki-Prototype-Application\Wiki Prototype Application\obj\Debug\Wiki Prototype Application.exe
 C:\Users\Kyle\Documents\GitHub\Wiki-Prototype-Application\Wiki Prototype Application\obj\Debug\Wiki Prototype Application.pdb
+C:\Users\30048165\Documents\GitHub\Wiki-Prototype-Application\Wiki Prototype Application\bin\Debug\Wiki Prototype Application.exe.config
+C:\Users\30048165\Documents\GitHub\Wiki-Prototype-Application\Wiki Prototype Application\bin\Debug\Wiki Prototype Application.exe
+C:\Users\30048165\Documents\GitHub\Wiki-Prototype-Application\Wiki Prototype Application\bin\Debug\Wiki Prototype Application.pdb
+C:\Users\30048165\Documents\GitHub\Wiki-Prototype-Application\Wiki Prototype Application\obj\Debug\Wiki Prototype Application.csproj.AssemblyReference.cache
+C:\Users\30048165\Documents\GitHub\Wiki-Prototype-Application\Wiki Prototype Application\obj\Debug\Wiki Prototype Application.csproj.SuggestedBindingRedirects.cache
+C:\Users\30048165\Documents\GitHub\Wiki-Prototype-Application\Wiki Prototype Application\obj\Debug\Wiki_Prototype_Application.WikiPrototypeApplication.resources
+C:\Users\30048165\Documents\GitHub\Wiki-Prototype-Application\Wiki Prototype Application\obj\Debug\Wiki_Prototype_Application.Properties.Resources.resources
+C:\Users\30048165\Documents\GitHub\Wiki-Prototype-Application\Wiki Prototype Application\obj\Debug\Wiki Prototype Application.csproj.GenerateResource.cache
+C:\Users\30048165\Documents\GitHub\Wiki-Prototype-Application\Wiki Prototype Application\obj\Debug\Wiki Prototype Application.csproj.CoreCompileInputs.cache
+C:\Users\30048165\Documents\GitHub\Wiki-Prototype-Application\Wiki Prototype Application\obj\Debug\Wiki Prototype Application.exe
+C:\Users\30048165\Documents\GitHub\Wiki-Prototype-Application\Wiki Prototype Application\obj\Debug\Wiki Prototype Application.pdb

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime;
 
+
 namespace Wiki_Prototype_Application
 {
     public partial class WikiPrototypeApplication : Form
@@ -22,7 +23,7 @@ namespace Wiki_Prototype_Application
         static int column = 4; //Name, Category, Structure, Definition
         static String[,] wikiArray = new string[row, column];
         int counter = 0;
-        
+
 
         private void WikiPrototypeApplication_Load(object sender, EventArgs e)
         {
@@ -36,11 +37,22 @@ namespace Wiki_Prototype_Application
             {
                 try
                 {
-                    wikiArray[counter, 0] = textBoxName.Text;
-                    wikiArray[counter, 1] = textBoxCategory.Text;
-                    wikiArray[counter, 2] = textBoxStructure.Text;
-                    wikiArray[counter, 3] = textBoxDefinition.Text;
-                    counter++;
+                    if (!string.IsNullOrWhiteSpace(textBoxName.Text) &&
+                !string.IsNullOrWhiteSpace(textBoxCategory.Text) &&
+                !string.IsNullOrWhiteSpace(textBoxStructure.Text) &&
+                !string.IsNullOrWhiteSpace(textBoxDefinition.Text))
+
+                    {
+                        wikiArray[counter, 0] = textBoxName.Text;
+                        wikiArray[counter, 1] = textBoxCategory.Text;
+                        wikiArray[counter, 2] = textBoxStructure.Text;
+                        wikiArray[counter, 3] = textBoxDefinition.Text;
+                        counter++;
+                    }
+                    else
+                    {
+                        toolStripStatusLabel.Text = "Error: please fill out all fields.";
+                    }
                 }
                 catch
                 {
@@ -55,52 +67,73 @@ namespace Wiki_Prototype_Application
         }
 
         // Delete button method
+        // Deletes the item at the selected index and shuffles the array up to fill it
+        // Method ensures blank elements are shuffled to the end of the array
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             try
             {
-                int deleteIndex = listBoxOne.SelectedIndex;
-                String[,] copyArray = wikiArray;
-                int deleteCounter = 0;
-                counter--;
-
-                for (int i = 0; i < row; i++)
+                int selectedRecord = listViewOne.SelectedIndices[0];
+                if (selectedRecord >= 0)
                 {
-                    for (int j = 0; j < column; j++)
+                    DialogResult delName = MessageBox.Show("Do you wish to delete this wiki record?",
+                     "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (delName == DialogResult.Yes)
                     {
-                        if(i == deleteIndex)
-                        {
-                            deleteCounter++;
-                            copyArray[i, j] = wikiArray[i + deleteCounter, j];
-                        }
-                        else if(deleteIndex == row-1)
-                        {
-                            copyArray[i, j] = "";
-                        }
-                        else
-                        {
-                            copyArray[i, j] = wikiArray[i + deleteCounter, j];
-                        }
+                        wikiArray[selectedRecord, 0] = "~";
+                        wikiArray[selectedRecord, 1] = "~";
+                        wikiArray[selectedRecord, 2] = "~";
+                        wikiArray[selectedRecord, 3] = "~";
                     }
                 }
-                wikiArray = copyArray;
+                else
+                {
+                    toolStripStatusLabel.Text = "Error: please select a valid item from the list view box.";
+                }
             }
-            catch
+            catch (Exception)
             {
-
+                toolStripStatusLabel.Text = "Error: please select a valid item.";
             }
+
+
             displayArray();
         }
         public void displayArray()
         {
-            listBoxOne.Items.Clear();
-            string idk = "";
-            for(int x = 0; x<row; x++)
-            {
-                idk = wikiArray[x, 0] + "\t" + wikiArray[x, 1] + "\t" + wikiArray[x, 2];
-                listBoxOne.Items.Add(idk);
-            }
+            listViewOne.Items.Clear();
+            listViewOne.ForeColor = Color.Black;
 
+            // Iterate through the array and display records which are not empty
+            for (int x = 0; x < row; x++)
+            {
+                if (!string.IsNullOrEmpty(wikiArray[x, 0]))
+                {
+                    ListViewItem lvi = new ListViewItem(wikiArray[x, 0]);
+                    lvi.SubItems.Add(wikiArray[x, 1]);
+                    lvi.SubItems.Add(wikiArray[x, 2]);
+                    listViewOne.Items.Add(lvi);
+                }
+
+            }
+        }
+
+        private void listViewOne_Click(object sender, EventArgs e)
+        {
+            int selectedRecord = listViewOne.SelectedIndices[0];
+            textBoxName.Text = wikiArray[selectedRecord, 0];
+            textBoxCategory.Text = wikiArray[selectedRecord, 1];
+            textBoxStructure.Text = wikiArray[selectedRecord, 2];
+            textBoxDefinition.Text = wikiArray[selectedRecord, 3];
+        }
+
+        private void buttonClear_Click(object sender, EventArgs e)
+        {
+            textBoxName.Text = "";
+            textBoxCategory.Text = "";
+            textBoxStructure.Text = "";
+            textBoxDefinition.Text = "";
+            textBoxOne.Text = "";
         }
     }
 }

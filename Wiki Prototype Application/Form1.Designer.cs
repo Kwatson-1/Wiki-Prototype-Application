@@ -34,7 +34,6 @@ namespace Wiki_Prototype_Application
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
             this.textBoxOne = new System.Windows.Forms.TextBox();
-            this.listBoxOne = new System.Windows.Forms.ListBox();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.buttonLoad = new System.Windows.Forms.Button();
             this.buttonClear = new System.Windows.Forms.Button();
@@ -46,12 +45,17 @@ namespace Wiki_Prototype_Application
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.listViewOne = new System.Windows.Forms.ListView();
+            this.columnName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnCategory = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.statusStripOne = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStripOne.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(24, 13);
+            this.buttonAdd.Location = new System.Drawing.Point(29, 22);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(136, 51);
             this.buttonAdd.TabIndex = 0;
@@ -61,7 +65,7 @@ namespace Wiki_Prototype_Application
             // 
             // buttonEdit
             // 
-            this.buttonEdit.Location = new System.Drawing.Point(168, 13);
+            this.buttonEdit.Location = new System.Drawing.Point(173, 22);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(136, 51);
             this.buttonEdit.TabIndex = 1;
@@ -70,7 +74,7 @@ namespace Wiki_Prototype_Application
             // 
             // buttonDelete
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(24, 75);
+            this.buttonDelete.Location = new System.Drawing.Point(29, 84);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(136, 51);
             this.buttonDelete.TabIndex = 2;
@@ -80,7 +84,7 @@ namespace Wiki_Prototype_Application
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(508, 346);
+            this.buttonSave.Location = new System.Drawing.Point(513, 355);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(170, 59);
             this.buttonSave.TabIndex = 3;
@@ -89,22 +93,14 @@ namespace Wiki_Prototype_Application
             // 
             // textBoxOne
             // 
-            this.textBoxOne.Location = new System.Drawing.Point(324, 15);
+            this.textBoxOne.Location = new System.Drawing.Point(329, 24);
             this.textBoxOne.Name = "textBoxOne";
             this.textBoxOne.Size = new System.Drawing.Size(229, 20);
             this.textBoxOne.TabIndex = 4;
             // 
-            // listBoxOne
-            // 
-            this.listBoxOne.FormattingEnabled = true;
-            this.listBoxOne.Location = new System.Drawing.Point(324, 56);
-            this.listBoxOne.Name = "listBoxOne";
-            this.listBoxOne.Size = new System.Drawing.Size(354, 277);
-            this.listBoxOne.TabIndex = 5;
-            // 
             // buttonSearch
             // 
-            this.buttonSearch.Location = new System.Drawing.Point(559, 12);
+            this.buttonSearch.Location = new System.Drawing.Point(564, 21);
             this.buttonSearch.Name = "buttonSearch";
             this.buttonSearch.Size = new System.Drawing.Size(119, 23);
             this.buttonSearch.TabIndex = 7;
@@ -113,7 +109,7 @@ namespace Wiki_Prototype_Application
             // 
             // buttonLoad
             // 
-            this.buttonLoad.Location = new System.Drawing.Point(324, 346);
+            this.buttonLoad.Location = new System.Drawing.Point(329, 355);
             this.buttonLoad.Name = "buttonLoad";
             this.buttonLoad.Size = new System.Drawing.Size(170, 59);
             this.buttonLoad.TabIndex = 8;
@@ -122,30 +118,31 @@ namespace Wiki_Prototype_Application
             // 
             // buttonClear
             // 
-            this.buttonClear.Location = new System.Drawing.Point(168, 75);
+            this.buttonClear.Location = new System.Drawing.Point(173, 84);
             this.buttonClear.Name = "buttonClear";
             this.buttonClear.Size = new System.Drawing.Size(136, 51);
             this.buttonClear.TabIndex = 9;
             this.buttonClear.Text = "Clear";
             this.buttonClear.UseVisualStyleBackColor = true;
+            this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
             // 
             // textBoxName
             // 
-            this.textBoxName.Location = new System.Drawing.Point(95, 160);
+            this.textBoxName.Location = new System.Drawing.Point(100, 169);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(209, 20);
             this.textBoxName.TabIndex = 10;
             // 
             // textBoxCategory
             // 
-            this.textBoxCategory.Location = new System.Drawing.Point(95, 200);
+            this.textBoxCategory.Location = new System.Drawing.Point(100, 209);
             this.textBoxCategory.Name = "textBoxCategory";
             this.textBoxCategory.Size = new System.Drawing.Size(209, 20);
             this.textBoxCategory.TabIndex = 11;
             // 
             // textBoxDefinition
             // 
-            this.textBoxDefinition.Location = new System.Drawing.Point(95, 280);
+            this.textBoxDefinition.Location = new System.Drawing.Point(100, 289);
             this.textBoxDefinition.Multiline = true;
             this.textBoxDefinition.Name = "textBoxDefinition";
             this.textBoxDefinition.Size = new System.Drawing.Size(209, 126);
@@ -153,7 +150,7 @@ namespace Wiki_Prototype_Application
             // 
             // textBoxStructure
             // 
-            this.textBoxStructure.Location = new System.Drawing.Point(95, 240);
+            this.textBoxStructure.Location = new System.Drawing.Point(100, 249);
             this.textBoxStructure.Name = "textBoxStructure";
             this.textBoxStructure.Size = new System.Drawing.Size(209, 20);
             this.textBoxStructure.TabIndex = 14;
@@ -161,7 +158,7 @@ namespace Wiki_Prototype_Application
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 160);
+            this.label1.Location = new System.Drawing.Point(26, 169);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 15;
@@ -170,7 +167,7 @@ namespace Wiki_Prototype_Application
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(21, 200);
+            this.label2.Location = new System.Drawing.Point(26, 209);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 13);
             this.label2.TabIndex = 16;
@@ -179,7 +176,7 @@ namespace Wiki_Prototype_Application
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(21, 240);
+            this.label3.Location = new System.Drawing.Point(26, 249);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(50, 13);
             this.label3.TabIndex = 17;
@@ -188,26 +185,59 @@ namespace Wiki_Prototype_Application
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(21, 280);
+            this.label4.Location = new System.Drawing.Point(26, 289);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(51, 13);
             this.label4.TabIndex = 18;
             this.label4.Text = "Definition";
             // 
+            // listViewOne
+            // 
+            this.listViewOne.Activation = System.Windows.Forms.ItemActivation.OneClick;
+            this.listViewOne.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnName,
+            this.columnCategory});
+            this.listViewOne.HideSelection = false;
+            this.listViewOne.Location = new System.Drawing.Point(329, 63);
+            this.listViewOne.Name = "listViewOne";
+            this.listViewOne.Size = new System.Drawing.Size(354, 275);
+            this.listViewOne.TabIndex = 20;
+            this.listViewOne.UseCompatibleStateImageBehavior = false;
+            this.listViewOne.View = System.Windows.Forms.View.Details;
+            this.listViewOne.Click += new System.EventHandler(this.listViewOne_Click);
+            // 
+            // columnName
+            // 
+            this.columnName.Text = "Name";
+            this.columnName.Width = 176;
+            // 
+            // columnCategory
+            // 
+            this.columnCategory.Text = "Category";
+            this.columnCategory.Width = 174;
+            // 
             // statusStripOne
             // 
-            this.statusStripOne.Location = new System.Drawing.Point(0, 422);
+            this.statusStripOne.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel});
+            this.statusStripOne.Location = new System.Drawing.Point(0, 433);
             this.statusStripOne.Name = "statusStripOne";
-            this.statusStripOne.Size = new System.Drawing.Size(720, 22);
-            this.statusStripOne.TabIndex = 19;
-            this.statusStripOne.Text = "statusStrip1";
+            this.statusStripOne.Size = new System.Drawing.Size(710, 22);
+            this.statusStripOne.TabIndex = 21;
+            this.statusStripOne.Text = "statusStripOne";
+            // 
+            // toolStripStatusLabel
+            // 
+            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(0, 17);
             // 
             // WikiPrototypeApplication
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(720, 444);
+            this.ClientSize = new System.Drawing.Size(710, 455);
             this.Controls.Add(this.statusStripOne);
+            this.Controls.Add(this.listViewOne);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -219,7 +249,6 @@ namespace Wiki_Prototype_Application
             this.Controls.Add(this.buttonClear);
             this.Controls.Add(this.buttonLoad);
             this.Controls.Add(this.buttonSearch);
-            this.Controls.Add(this.listBoxOne);
             this.Controls.Add(this.textBoxOne);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonDelete);
@@ -228,6 +257,8 @@ namespace Wiki_Prototype_Application
             this.Name = "WikiPrototypeApplication";
             this.Text = "Wiki Prototype Application";
             this.Load += new System.EventHandler(this.WikiPrototypeApplication_Load);
+            this.statusStripOne.ResumeLayout(false);
+            this.statusStripOne.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -240,7 +271,6 @@ namespace Wiki_Prototype_Application
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.TextBox textBoxOne;
-        private System.Windows.Forms.ListBox listBoxOne;
         private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.Button buttonLoad;
         private System.Windows.Forms.Button buttonClear;
@@ -252,7 +282,11 @@ namespace Wiki_Prototype_Application
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ListView listViewOne;
+        private System.Windows.Forms.ColumnHeader columnName;
+        private System.Windows.Forms.ColumnHeader columnCategory;
         private System.Windows.Forms.StatusStrip statusStripOne;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
     }
 }
 
