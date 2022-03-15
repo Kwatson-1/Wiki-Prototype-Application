@@ -27,7 +27,7 @@ namespace Wiki_Prototype_Application
 
         private void WikiPrototypeApplication_Load(object sender, EventArgs e)
         {
-
+            toolStripStatusLabel.Text = "Kris Sucks";
         }
 
         // Add button method
@@ -61,9 +61,9 @@ namespace Wiki_Prototype_Application
             }
             else
             {
-                statusStripOne.Text = "The array is full, delete a wiki entry and try again.";
+                toolStripStatusLabel.Text = "Error: The array is full, delete a wiki entry and try again.";
             }
-            displayArray();
+            PostProcessFunction();
         }
 
         // Delete button method
@@ -85,10 +85,7 @@ namespace Wiki_Prototype_Application
                         wikiArray[selectedRecord, 2] = "~";
                         wikiArray[selectedRecord, 3] = "~";
                     }
-                }
-                else
-                {
-                    toolStripStatusLabel.Text = "Error: please select a valid item from the list view box.";
+
                 }
             }
             catch (Exception)
@@ -97,7 +94,7 @@ namespace Wiki_Prototype_Application
             }
 
 
-            displayArray();
+            PostProcessFunction();
         }
         public void displayArray()
         {
@@ -129,11 +126,69 @@ namespace Wiki_Prototype_Application
 
         private void buttonClear_Click(object sender, EventArgs e)
         {
+            ClearFields();
+        }
+
+
+        public void ClearFields()
+        {
             textBoxName.Text = "";
             textBoxCategory.Text = "";
             textBoxStructure.Text = "";
             textBoxDefinition.Text = "";
             textBoxOne.Text = "";
+        }
+        public void BubbleSort()
+        {
+            for (int x = 0; x < row; x++)
+            {
+                for (int y = 0; y < row-1; y++)
+                {
+                    if (string.CompareOrdinal(wikiArray[y, 1], wikiArray[y + 1, 1]) > 0)
+                    {
+                        for (int i = 0; i < column; i++)
+                        {
+                            string temp = wikiArray[y, i];
+                            wikiArray[y, i] = wikiArray[y + 1, i];
+                            wikiArray[y + 1, i] = temp;
+                        }
+                    }
+                }
+            }
+            displayArray();
+        }
+        
+        public void PostProcessFunction()
+        {
+            BubbleSort();
+            ClearFields();
+            displayArray();
+            
+        }
+
+        private void buttonEdit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int selectedRecord = listViewOne.SelectedIndices[0];
+                if (selectedRecord >= 0)
+                {
+                    var result = MessageBox.Show("Proceed with update?", "Edit Record",
+                        MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (result == DialogResult.OK)
+                    {
+                        wikiArray[selectedRecord, 0] = textBoxName.Text;
+                        wikiArray[selectedRecord, 1] = textBoxCategory.Text;
+                        wikiArray[selectedRecord, 2] = textBoxStructure.Text;
+                        wikiArray[selectedRecord, 3] = textBoxDefinition.Text;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                toolStripStatusLabel.Text = "Error: please select a valid item.";
+            }
+            PostProcessFunction();
         }
     }
 }

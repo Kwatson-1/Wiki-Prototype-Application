@@ -71,6 +71,7 @@ namespace Wiki_Prototype_Application
             this.buttonEdit.TabIndex = 1;
             this.buttonEdit.Text = "Edit";
             this.buttonEdit.UseVisualStyleBackColor = true;
+            this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
             // 
             // buttonDelete
             // 
@@ -87,7 +88,7 @@ namespace Wiki_Prototype_Application
             this.buttonSave.Location = new System.Drawing.Point(513, 355);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(170, 59);
-            this.buttonSave.TabIndex = 3;
+            this.buttonSave.TabIndex = 11;
             this.buttonSave.Text = "Save";
             this.buttonSave.UseVisualStyleBackColor = true;
             // 
@@ -96,14 +97,14 @@ namespace Wiki_Prototype_Application
             this.textBoxOne.Location = new System.Drawing.Point(329, 24);
             this.textBoxOne.Name = "textBoxOne";
             this.textBoxOne.Size = new System.Drawing.Size(229, 20);
-            this.textBoxOne.TabIndex = 4;
+            this.textBoxOne.TabIndex = 7;
             // 
             // buttonSearch
             // 
-            this.buttonSearch.Location = new System.Drawing.Point(564, 21);
+            this.buttonSearch.Location = new System.Drawing.Point(564, 23);
             this.buttonSearch.Name = "buttonSearch";
-            this.buttonSearch.Size = new System.Drawing.Size(119, 23);
-            this.buttonSearch.TabIndex = 7;
+            this.buttonSearch.Size = new System.Drawing.Size(119, 22);
+            this.buttonSearch.TabIndex = 8;
             this.buttonSearch.Text = "Search";
             this.buttonSearch.UseVisualStyleBackColor = true;
             // 
@@ -112,7 +113,7 @@ namespace Wiki_Prototype_Application
             this.buttonLoad.Location = new System.Drawing.Point(329, 355);
             this.buttonLoad.Name = "buttonLoad";
             this.buttonLoad.Size = new System.Drawing.Size(170, 59);
-            this.buttonLoad.TabIndex = 8;
+            this.buttonLoad.TabIndex = 10;
             this.buttonLoad.Text = "Load";
             this.buttonLoad.UseVisualStyleBackColor = true;
             // 
@@ -121,7 +122,7 @@ namespace Wiki_Prototype_Application
             this.buttonClear.Location = new System.Drawing.Point(173, 84);
             this.buttonClear.Name = "buttonClear";
             this.buttonClear.Size = new System.Drawing.Size(136, 51);
-            this.buttonClear.TabIndex = 9;
+            this.buttonClear.TabIndex = 3;
             this.buttonClear.Text = "Clear";
             this.buttonClear.UseVisualStyleBackColor = true;
             this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
@@ -131,14 +132,14 @@ namespace Wiki_Prototype_Application
             this.textBoxName.Location = new System.Drawing.Point(100, 169);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(209, 20);
-            this.textBoxName.TabIndex = 10;
+            this.textBoxName.TabIndex = 4;
             // 
             // textBoxCategory
             // 
             this.textBoxCategory.Location = new System.Drawing.Point(100, 209);
             this.textBoxCategory.Name = "textBoxCategory";
             this.textBoxCategory.Size = new System.Drawing.Size(209, 20);
-            this.textBoxCategory.TabIndex = 11;
+            this.textBoxCategory.TabIndex = 5;
             // 
             // textBoxDefinition
             // 
@@ -146,14 +147,14 @@ namespace Wiki_Prototype_Application
             this.textBoxDefinition.Multiline = true;
             this.textBoxDefinition.Name = "textBoxDefinition";
             this.textBoxDefinition.Size = new System.Drawing.Size(209, 126);
-            this.textBoxDefinition.TabIndex = 13;
+            this.textBoxDefinition.TabIndex = 7;
             // 
             // textBoxStructure
             // 
             this.textBoxStructure.Location = new System.Drawing.Point(100, 249);
             this.textBoxStructure.Name = "textBoxStructure";
             this.textBoxStructure.Size = new System.Drawing.Size(209, 20);
-            this.textBoxStructure.TabIndex = 14;
+            this.textBoxStructure.TabIndex = 6;
             // 
             // label1
             // 
@@ -201,7 +202,7 @@ namespace Wiki_Prototype_Application
             this.listViewOne.Location = new System.Drawing.Point(329, 63);
             this.listViewOne.Name = "listViewOne";
             this.listViewOne.Size = new System.Drawing.Size(354, 275);
-            this.listViewOne.TabIndex = 20;
+            this.listViewOne.TabIndex = 9;
             this.listViewOne.UseCompatibleStateImageBehavior = false;
             this.listViewOne.View = System.Windows.Forms.View.Details;
             this.listViewOne.Click += new System.EventHandler(this.listViewOne_Click);
