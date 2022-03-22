@@ -51,6 +51,7 @@ namespace Wiki_Prototype_Application
             this.statusStripOne = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.buttonLoadData = new System.Windows.Forms.Button();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStripOne.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -223,7 +224,8 @@ namespace Wiki_Prototype_Application
             // statusStripOne
             // 
             this.statusStripOne.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel});
+            this.toolStripStatusLabel,
+            this.toolStripStatusLabel1});
             this.statusStripOne.Location = new System.Drawing.Point(0, 433);
             this.statusStripOne.Name = "statusStripOne";
             this.statusStripOne.Size = new System.Drawing.Size(710, 22);
@@ -244,6 +246,12 @@ namespace Wiki_Prototype_Application
             this.buttonLoadData.Text = "AutoFill";
             this.buttonLoadData.UseVisualStyleBackColor = true;
             this.buttonLoadData.Click += new System.EventHandler(this.buttonLoadData_Click);
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
+            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
             // WikiPrototypeApplication
             // 
@@ -303,6 +311,7 @@ namespace Wiki_Prototype_Application
         private System.Windows.Forms.StatusStrip statusStripOne;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
         private System.Windows.Forms.Button buttonLoadData;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }
 

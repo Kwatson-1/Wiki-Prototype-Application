@@ -140,11 +140,10 @@ namespace Wiki_Prototype_Application
             textBoxStructure.Text = "";
             textBoxDefinition.Text = "";
             textBoxOne.Text = "";
-            if(listViewOne.FocusedItem != null)
+            if (listViewOne.SelectedItems.Count != 0)
             {
-                listViewOne.FocusedItem.Focused = false;
+                listViewOne.SelectedItems[0].Selected = false;
             }
-
         }
         #endregion
         #region Sort Method
@@ -175,11 +174,13 @@ namespace Wiki_Prototype_Application
             }
         }
         #endregion
+        #region Post Process 
         public void PostProcessFunction()
         {
             BubbleSort();
             displayArray();
         }
+        #endregion
         #region Edit Button
         private void buttonEdit_Click(object sender, EventArgs e)
         {
@@ -216,6 +217,11 @@ namespace Wiki_Prototype_Application
             bool flag = false;
             int foundIndex = -1;
 
+            if (listViewOne.SelectedItems.Count != 0)
+            {
+                listViewOne.SelectedItems[0].Selected = false;
+            }
+
             while (!flag && !((finalIndex - startIndex) <= 1))
             {
                 int newIndex = (finalIndex + startIndex) / 2;
@@ -241,6 +247,8 @@ namespace Wiki_Prototype_Application
                 textBoxCategory.Text = wikiArray[foundIndex, 1];
                 textBoxStructure.Text = wikiArray[foundIndex, 2];
                 textBoxDefinition.Text = wikiArray[foundIndex, 3];
+                listViewOne.Items[foundIndex].Selected = true;
+                listViewOne.HideSelection = false;
             }
             else
                 toolStripStatusLabel.Text = "Not found ";
