@@ -50,6 +50,7 @@ namespace Wiki_Prototype_Application
             this.columnCategory = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.statusStripOne = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.buttonLoadData = new System.Windows.Forms.Button();
             this.statusStripOne.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -107,6 +108,7 @@ namespace Wiki_Prototype_Application
             this.buttonSearch.TabIndex = 8;
             this.buttonSearch.Text = "Search";
             this.buttonSearch.UseVisualStyleBackColor = true;
+            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
             // 
             // buttonLoad
             // 
@@ -129,29 +131,29 @@ namespace Wiki_Prototype_Application
             // 
             // textBoxName
             // 
-            this.textBoxName.Location = new System.Drawing.Point(100, 169);
+            this.textBoxName.Location = new System.Drawing.Point(100, 155);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(209, 20);
             this.textBoxName.TabIndex = 4;
             // 
             // textBoxCategory
             // 
-            this.textBoxCategory.Location = new System.Drawing.Point(100, 209);
+            this.textBoxCategory.Location = new System.Drawing.Point(100, 195);
             this.textBoxCategory.Name = "textBoxCategory";
             this.textBoxCategory.Size = new System.Drawing.Size(209, 20);
             this.textBoxCategory.TabIndex = 5;
             // 
             // textBoxDefinition
             // 
-            this.textBoxDefinition.Location = new System.Drawing.Point(100, 289);
+            this.textBoxDefinition.Location = new System.Drawing.Point(100, 275);
             this.textBoxDefinition.Multiline = true;
             this.textBoxDefinition.Name = "textBoxDefinition";
-            this.textBoxDefinition.Size = new System.Drawing.Size(209, 126);
+            this.textBoxDefinition.Size = new System.Drawing.Size(209, 139);
             this.textBoxDefinition.TabIndex = 7;
             // 
             // textBoxStructure
             // 
-            this.textBoxStructure.Location = new System.Drawing.Point(100, 249);
+            this.textBoxStructure.Location = new System.Drawing.Point(100, 235);
             this.textBoxStructure.Name = "textBoxStructure";
             this.textBoxStructure.Size = new System.Drawing.Size(209, 20);
             this.textBoxStructure.TabIndex = 6;
@@ -159,7 +161,7 @@ namespace Wiki_Prototype_Application
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(26, 169);
+            this.label1.Location = new System.Drawing.Point(26, 155);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 15;
@@ -168,7 +170,7 @@ namespace Wiki_Prototype_Application
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(26, 209);
+            this.label2.Location = new System.Drawing.Point(26, 195);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 13);
             this.label2.TabIndex = 16;
@@ -177,7 +179,7 @@ namespace Wiki_Prototype_Application
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(26, 249);
+            this.label3.Location = new System.Drawing.Point(26, 235);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(50, 13);
             this.label3.TabIndex = 17;
@@ -186,7 +188,7 @@ namespace Wiki_Prototype_Application
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(26, 289);
+            this.label4.Location = new System.Drawing.Point(26, 275);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(51, 13);
             this.label4.TabIndex = 18;
@@ -198,6 +200,7 @@ namespace Wiki_Prototype_Application
             this.listViewOne.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnName,
             this.columnCategory});
+            this.listViewOne.FullRowSelect = true;
             this.listViewOne.HideSelection = false;
             this.listViewOne.Location = new System.Drawing.Point(329, 63);
             this.listViewOne.Name = "listViewOne";
@@ -232,11 +235,22 @@ namespace Wiki_Prototype_Application
             this.toolStripStatusLabel.Name = "toolStripStatusLabel";
             this.toolStripStatusLabel.Size = new System.Drawing.Size(0, 17);
             // 
+            // buttonLoadData
+            // 
+            this.buttonLoadData.Location = new System.Drawing.Point(13, 390);
+            this.buttonLoadData.Name = "buttonLoadData";
+            this.buttonLoadData.Size = new System.Drawing.Size(75, 23);
+            this.buttonLoadData.TabIndex = 22;
+            this.buttonLoadData.Text = "AutoFill";
+            this.buttonLoadData.UseVisualStyleBackColor = true;
+            this.buttonLoadData.Click += new System.EventHandler(this.buttonLoadData_Click);
+            // 
             // WikiPrototypeApplication
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(710, 455);
+            this.Controls.Add(this.buttonLoadData);
             this.Controls.Add(this.statusStripOne);
             this.Controls.Add(this.listViewOne);
             this.Controls.Add(this.label4);
@@ -288,6 +302,7 @@ namespace Wiki_Prototype_Application
         private System.Windows.Forms.ColumnHeader columnCategory;
         private System.Windows.Forms.StatusStrip statusStripOne;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
+        private System.Windows.Forms.Button buttonLoadData;
     }
 }
 
