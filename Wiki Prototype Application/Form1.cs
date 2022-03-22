@@ -283,3 +283,4 @@ namespace Wiki_Prototype_Application
     }
 }
 
+//stream reading and formatter
