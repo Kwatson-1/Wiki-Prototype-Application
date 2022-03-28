@@ -85,7 +85,7 @@ namespace Wiki_Prototype_Application
                         wikiArray[selectedRecord, 1] = "";
                         wikiArray[selectedRecord, 2] = "";
                         wikiArray[selectedRecord, 3] = "";
-                        counter--;
+                        counter-=1;
                     }
                 }
             }
@@ -93,8 +93,7 @@ namespace Wiki_Prototype_Application
             {
                 toolStripStatusLabel.Text = "Error: please select a valid item.";
             }
-
-            PostProcessFunction();
+            displayArray();
         }
         #endregion
         #region Display Array
@@ -104,14 +103,14 @@ namespace Wiki_Prototype_Application
             // Iterate through the array and display records which are not empty
             for (int i = 0; i < row; i++)
             {
-                if (!string.IsNullOrWhiteSpace(wikiArray[i, 0]))
-                {
+                //if (!string.IsNullOrWhiteSpace(wikiArray[i, 0]))
+               // {
                     ListViewItem lvi = new ListViewItem(wikiArray[i, 0]);
                     lvi.SubItems.Add(wikiArray[i, 1]);
                     lvi.SubItems.Add(wikiArray[i, 2]);
                     lvi.SubItems.Add(wikiArray[i, 3]);
                     listViewOne.Items.Add(lvi);
-                }
+                //}
 
             }
         }
@@ -149,17 +148,19 @@ namespace Wiki_Prototype_Application
         #region Sort Method
         public void BubbleSort()
         {
-            for (int x = 1; x < row; x++)
+            for (int i = 0; i < row - 1; i++)
             {
-                for (int i = 0; i < row - 1; i++)
+                for (int j = 0; j < row - 1; j++)
                 {
-                    if (!(string.IsNullOrEmpty(wikiArray[i + 1, 0])))
+                    if (string.IsNullOrEmpty(wikiArray[j, 0]))
                     {
-                        if (string.Compare(wikiArray[i, 0], wikiArray[i + 1, 0]) == 1)
-                        {
-                            Swap(i);
-                        }
+                        Swap(j);
                     }
+                    else if (string.Compare(wikiArray[j, 0], wikiArray[j + 1, 0]) > 0)
+                    {
+                        Swap(j);
+                    }
+
                 }
             }
         }
