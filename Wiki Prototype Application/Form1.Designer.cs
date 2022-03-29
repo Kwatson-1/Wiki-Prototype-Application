@@ -63,7 +63,7 @@ namespace Wiki_Prototype_Application
             this.buttonAdd.TabIndex = 0;
             this.buttonAdd.Text = "Add";
             this.buttonAdd.UseVisualStyleBackColor = true;
-            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
+            this.buttonAdd.Click += new System.EventHandler(this.ButtonAdd_Click);
             // 
             // buttonEdit
             // 
@@ -83,7 +83,7 @@ namespace Wiki_Prototype_Application
             this.buttonDelete.TabIndex = 2;
             this.buttonDelete.Text = "Delete";
             this.buttonDelete.UseVisualStyleBackColor = true;
-            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            this.buttonDelete.Click += new System.EventHandler(this.ButtonDelete_Click);
             // 
             // buttonSave
             // 
@@ -93,7 +93,7 @@ namespace Wiki_Prototype_Application
             this.buttonSave.TabIndex = 11;
             this.buttonSave.Text = "Save";
             this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            this.buttonSave.Click += new System.EventHandler(this.ButtonSave_Click);
             // 
             // textBoxOne
             // 
@@ -120,6 +120,7 @@ namespace Wiki_Prototype_Application
             this.buttonLoad.TabIndex = 10;
             this.buttonLoad.Text = "Load";
             this.buttonLoad.UseVisualStyleBackColor = true;
+            this.buttonLoad.Click += new System.EventHandler(this.ButtonLoad_Click);
             // 
             // buttonClear
             // 
@@ -252,7 +253,7 @@ namespace Wiki_Prototype_Application
             this.buttonLoadData.TabIndex = 22;
             this.buttonLoadData.Text = "AutoFill";
             this.buttonLoadData.UseVisualStyleBackColor = true;
-            this.buttonLoadData.Click += new System.EventHandler(this.buttonLoadData_Click);
+            this.buttonLoadData.Click += new System.EventHandler(this.ButtonLoadData_Click);
             // 
             // WikiPrototypeApplication
             // 

@@ -31,7 +31,7 @@ namespace Wiki_Prototype_Application
         }
         #region Add Button
         // Add button method
-        private void buttonAdd_Click(object sender, EventArgs e)
+        private void ButtonAdd_Click(object sender, EventArgs e)
         {
             if (counter < row)
             {
@@ -70,7 +70,7 @@ namespace Wiki_Prototype_Application
         // Delete button method
         // Deletes the item at the selected index and shuffles the array up to fill it
         // Method ensures blank elements are shuffled to the end of the array
-        private void buttonDelete_Click(object sender, EventArgs e)
+        private void ButtonDelete_Click(object sender, EventArgs e)
         {
 
                 try
@@ -104,11 +104,11 @@ namespace Wiki_Prototype_Application
                     MessageBox.Show("Select an item to delete.");
                 }
                 BubbleSort();
-                displayArray();
+                DisplayArray();
         }
         #endregion
         #region Display Array
-        public void displayArray()
+        public void DisplayArray()
         {
             listViewOne.Items.Clear();
             // Iterate through the array and display records which are not empty
@@ -188,7 +188,7 @@ namespace Wiki_Prototype_Application
         public void PostProcessFunction()
         {
             BubbleSort();
-            displayArray();
+            DisplayArray();
         }
         #endregion
         #region Edit Button
@@ -265,7 +265,7 @@ namespace Wiki_Prototype_Application
         }
         #endregion
         #region Data partial preload
-        private void buttonLoadData_Click(object sender, EventArgs e)
+        private void ButtonLoadData_Click(object sender, EventArgs e)
         {
             wikiArray[0, 0] = "nameone";
             wikiArray[1, 0] = "nametwo";
@@ -287,12 +287,12 @@ namespace Wiki_Prototype_Application
             wikiArray[2, 3] = "definitionthree";
             wikiArray[3, 3] = "definitionfour";
             counter += 4;
-            displayArray();
+            DisplayArray();
         }
         #endregion
 
         #region Button Save
-        private void buttonSave_Click(object sender, EventArgs e)
+        private void ButtonSave_Click(object sender, EventArgs e)
         {
             BinaryWriter bw;
             try
@@ -323,9 +323,44 @@ namespace Wiki_Prototype_Application
         }
         #endregion
 
+        #region Button Load
+        private void ButtonLoad_Click(object sender, EventArgs e)
+        {
+            BinaryReader br;
+            int x = 0;
+            listViewOne.Items.Clear();
+            try
+            {
+                br = new BinaryReader(new FileStream("definitions.dat", FileMode.Open));
+            }
+            catch (Exception fe)
+            {
+                MessageBox.Show(fe.Message + "\n Cannot open file for reading");
+                return;
+            }
+            while (br.BaseStream.Position != br.BaseStream.Length)
+            {
+                try
+                {
+                    wikiArray[x, 0] = br.ReadString();
+                    wikiArray[x, 1] = br.ReadString();
+                    wikiArray[x, 2] = br.ReadString();
+                    wikiArray[x, 3] = br.ReadString();
+                    x++;
+                }
+                catch (Exception fe)
+                {
+                    MessageBox.Show("Cannot read data from file or EOF" + fe);
+                    break;
+                }
+                counter = x;
+                DisplayArray();
+            }
+            br.Close();
+        }
+        #endregion
+
 
     }
 }
 
-
-//stream reading and formatter
