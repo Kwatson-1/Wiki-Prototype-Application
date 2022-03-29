@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime;
-
+using System.IO;
 
 namespace Wiki_Prototype_Application
 {
@@ -72,28 +72,39 @@ namespace Wiki_Prototype_Application
         // Method ensures blank elements are shuffled to the end of the array
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            try
-            {
-                int selectedRecord = listViewOne.SelectedIndices[0];
-                if (selectedRecord >= 0)
+
+                try
                 {
-                    DialogResult delName = MessageBox.Show("Do you wish to delete this wiki record?",
-                     "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (delName == DialogResult.Yes)
+                    int currentRecord = listViewOne.SelectedIndices[0];
+                    if (currentRecord >= 0)
                     {
-                        wikiArray[selectedRecord, 0] = "";
-                        wikiArray[selectedRecord, 1] = "";
-                        wikiArray[selectedRecord, 2] = "";
-                        wikiArray[selectedRecord, 3] = "";
-                        counter-=1;
+                        DialogResult delName = MessageBox.Show("Do you wish to delete this definition?",
+                        "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                        if (delName == DialogResult.Yes)
+                        {
+                            ListViewItem lvi = new ListViewItem(wikiArray[currentRecord, 0]);
+                            wikiArray[currentRecord, 0] = ("~");
+                            wikiArray[currentRecord, 1] = ("~");
+                            wikiArray[currentRecord, 2] = ("~");
+                            wikiArray[currentRecord, 3] = ("~");
+                            counter--;
+                            ClearFields();
+                            //Sort();
+                            toolStripStatusLabel1.Text = "Data item deleted.";
+                        }
+                        else
+                        {
+                            MessageBox.Show("Item NOT Deleted", "Delete Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
-            }
-            catch (Exception)
-            {
-                toolStripStatusLabel.Text = "Error: please select a valid item.";
-            }
-            displayArray();
+                catch (ArgumentOutOfRangeException)
+                {
+                    MessageBox.Show("Select an item to delete.");
+                }
+                BubbleSort();
+                displayArray();
         }
         #endregion
         #region Display Array
@@ -103,14 +114,14 @@ namespace Wiki_Prototype_Application
             // Iterate through the array and display records which are not empty
             for (int i = 0; i < row; i++)
             {
-                //if (!string.IsNullOrWhiteSpace(wikiArray[i, 0]))
-               // {
+                if (!string.IsNullOrWhiteSpace(wikiArray[i, 0]))
+               {
                     ListViewItem lvi = new ListViewItem(wikiArray[i, 0]);
                     lvi.SubItems.Add(wikiArray[i, 1]);
                     lvi.SubItems.Add(wikiArray[i, 2]);
                     lvi.SubItems.Add(wikiArray[i, 3]);
                     listViewOne.Items.Add(lvi);
-                //}
+                }
 
             }
         }
@@ -148,19 +159,17 @@ namespace Wiki_Prototype_Application
         #region Sort Method
         public void BubbleSort()
         {
-            for (int i = 0; i < row - 1; i++)
+            for (int x = 0; x < row-1; x++)
             {
-                for (int j = 0; j < row - 1; j++)
+                for (int i = 0; i < row-1; i++)
                 {
-                    if (string.IsNullOrEmpty(wikiArray[j, 0]))
+                    if (!(string.IsNullOrEmpty(wikiArray[i + 1, 0])))
                     {
-                        Swap(j);
+                        if (string.CompareOrdinal(wikiArray[i, 0], wikiArray[i + 1, 0]) > 0)
+                        {
+                            Swap(i);
+                        }
                     }
-                    else if (string.Compare(wikiArray[j, 0], wikiArray[j + 1, 0]) > 0)
-                    {
-                        Swap(j);
-                    }
-
                 }
             }
         }
@@ -255,7 +264,7 @@ namespace Wiki_Prototype_Application
                 toolStripStatusLabel.Text = "Not found ";
         }
         #endregion
-        #region Data preload
+        #region Data partial preload
         private void buttonLoadData_Click(object sender, EventArgs e)
         {
             wikiArray[0, 0] = "nameone";
@@ -281,7 +290,42 @@ namespace Wiki_Prototype_Application
             displayArray();
         }
         #endregion
+
+        #region Button Save
+        private void buttonSave_Click(object sender, EventArgs e)
+        {
+            BinaryWriter bw;
+            try
+            {
+                bw = new BinaryWriter(new FileStream("definitions.dat", FileMode.Create));
+            }
+            catch (Exception fe)
+            {
+                MessageBox.Show(fe.Message + "\n Cannot append to file.");
+                return;
+            }
+            try
+            {
+                for (int i = 0; i < counter; i++)
+                {
+                    bw.Write(wikiArray[i, 0]);
+                    bw.Write(wikiArray[i, 1]);
+                    bw.Write(wikiArray[i, 2]);
+                    bw.Write(wikiArray[i, 3]);
+                }
+            }
+            catch (Exception fe)
+            {
+                MessageBox.Show(fe.Message + "\n Cannot write data to file.");
+                return;
+            }
+            bw.Close();
+        }
+        #endregion
+
+
     }
 }
+
 
 //stream reading and formatter
