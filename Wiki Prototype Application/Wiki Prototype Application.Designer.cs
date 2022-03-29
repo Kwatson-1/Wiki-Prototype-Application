@@ -73,7 +73,7 @@ namespace Wiki_Prototype_Application
             this.buttonEdit.TabIndex = 1;
             this.buttonEdit.Text = "Edit";
             this.buttonEdit.UseVisualStyleBackColor = true;
-            this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
+            this.buttonEdit.Click += new System.EventHandler(this.ButtonEdit_Click);
             // 
             // buttonDelete
             // 
@@ -204,7 +204,6 @@ namespace Wiki_Prototype_Application
             this.columnName,
             this.columnCategory});
             this.listViewOne.FullRowSelect = true;
-            this.listViewOne.HideSelection = false;
             this.listViewOne.Location = new System.Drawing.Point(329, 63);
             this.listViewOne.Name = "listViewOne";
             this.listViewOne.Size = new System.Drawing.Size(354, 275);
@@ -242,14 +241,14 @@ namespace Wiki_Prototype_Application
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
-            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
             // 
             // buttonLoadData
             // 
-            this.buttonLoadData.Location = new System.Drawing.Point(13, 390);
+            this.buttonLoadData.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.buttonLoadData.Location = new System.Drawing.Point(29, 390);
             this.buttonLoadData.Name = "buttonLoadData";
-            this.buttonLoadData.Size = new System.Drawing.Size(75, 23);
+            this.buttonLoadData.Size = new System.Drawing.Size(59, 23);
             this.buttonLoadData.TabIndex = 22;
             this.buttonLoadData.Text = "AutoFill";
             this.buttonLoadData.UseVisualStyleBackColor = true;
