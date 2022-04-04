@@ -131,8 +131,8 @@ namespace Wiki_Prototype_Application
             {
                 int newIndex = (finalIndex + startIndex) / 2;
                 // The string.Compare(a,b) method compares 2 strings a and b and returns an integer value
-                // -1 if a is less than b, 0 if they are equal, 1 if b is less than a
-                if (string.Compare(wikiArray[newIndex, 0], textBoxOne.Text) == 0) // they are equal
+                // -1 if a is less than b, 0 if they are equal, 1 if a is higher than b
+                if (string.Compare(wikiArray[newIndex, 0], textBoxOne.Text) == 0)
                 {
                     foundIndex = newIndex;
                     flag = true;
@@ -156,7 +156,7 @@ namespace Wiki_Prototype_Application
                 listViewOne.HideSelection = false;
             }
             else
-                toolStripStatusLabel.Text = "Not found ";
+                toolStripStatusLabel.Text = "Not found.";
         }
         #endregion
         // 6) Create a display method that will show the following information in a List box: Name and Category
