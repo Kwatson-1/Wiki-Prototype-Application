@@ -39,12 +39,22 @@ namespace Wiki_Prototype_Application
                 !string.IsNullOrWhiteSpace(textBoxStructure.Text) &&
                 !string.IsNullOrWhiteSpace(textBoxDefinition.Text))
                     {
-                        wikiArray[counter, 0] = textBoxName.Text;
-                        wikiArray[counter, 1] = textBoxCategory.Text;
-                        wikiArray[counter, 2] = textBoxStructure.Text;
-                        wikiArray[counter, 3] = textBoxDefinition.Text;
-                        counter++;
-                        ClearFields();
+                        if (!CheckIsDuplicate())
+                        {
+                            wikiArray[counter, 0] = textBoxName.Text;
+                            wikiArray[counter, 1] = textBoxCategory.Text;
+                            wikiArray[counter, 2] = textBoxStructure.Text;
+                            wikiArray[counter, 3] = textBoxDefinition.Text;
+                            counter++;
+                            toolStripStatusLabel.Text = "Item added successfully.";
+                            ClearFields();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error: item already exists.");
+                            toolStripStatusLabel.Text = "Error: cannot add duplicate entries.";
+                        }
+
                     }
                     else
                     {
@@ -196,7 +206,7 @@ namespace Wiki_Prototype_Application
         }
         #endregion
         // 7) Create a method so the user can select a definition (Name) from the Listbox and all the information is displayed in the appropriate Textboxes.
-        #region List View Click
+        #region Method List View Click
         private void listViewOne_Click(object sender, EventArgs e)
         {
             int selectedRecord = listViewOne.SelectedIndices[0];
@@ -226,6 +236,7 @@ namespace Wiki_Prototype_Application
         private void buttonClear_Click(object sender, EventArgs e)
         {
             ClearFields();
+            toolStripStatusLabel.Text = "Fields cleared.";
         }
         #endregion
         // Sorts and then displays the array.
@@ -236,7 +247,6 @@ namespace Wiki_Prototype_Application
             DisplayArray();
         }
         #endregion
-
         // 8) Create a SAVE button so the information from the 2D array can be written into a binary file called definitions.dat which is sorted by Name.
         #region Button Save
         //Creates a new binary writier object for writing items in the array to a stream to be saved to a file called defintions.dat.
@@ -357,6 +367,7 @@ namespace Wiki_Prototype_Application
         #endregion
         // 12) Create a DELETE button that will remove elements from the array.
         #region Method Delete
+        // Checks there is a selected record and replaces object strings with a tilde key to faciliate sort function.
         private void DeleteMethod()
         {
             int currentRecord = listViewOne.SelectedIndices[0];
@@ -374,7 +385,7 @@ namespace Wiki_Prototype_Application
                     wikiArray[currentRecord, 3] = ("~");
                     counter--;
                     ClearFields();
-                    toolStripStatusLabel.Text = "Data item deleted.";
+                    toolStripStatusLabel.Text = "Item deleted successfully.";
                 }
                 else
                 {
@@ -384,6 +395,7 @@ namespace Wiki_Prototype_Application
         }
         #endregion
         #region Method Double-Click Delete
+        // Deletes an object from the array when double clicked in the list box.
         private void ListViewOne_DoubleClick(object sender, EventArgs e)
         {
             DeleteMethod();
@@ -408,8 +420,8 @@ namespace Wiki_Prototype_Application
             PostProcessFunction();
         }
         #endregion
+        #region Data Partial Preload (Developmental)
         // Preloads data so for testing and demonstration purposes.
-        #region Data partial preload
         private void ButtonLoadData_Click(object sender, EventArgs e)
         {
             wikiArray[0, 0] = "nameone";
@@ -436,7 +448,7 @@ namespace Wiki_Prototype_Application
         }
         #endregion
         #region Form Load Function
-        // Fills array with symbols consistent with that used when an object is deleted
+        // Fills empty array elements with tilde keys so when an object is deleted it is not the only record with tilde keys.
         private void WikiPrototypeApplication_Load(object sender, EventArgs e)
         {
             for (int i = 0; i < row; i++)
@@ -449,7 +461,58 @@ namespace Wiki_Prototype_Application
             PostProcessFunction();
         }
         #endregion
+        #region Method Input Box Double Click Clear
+        // Clears all fields when double clicking in the input textbox.
+        private void textBoxOne_DoubleClick(object sender, EventArgs e)
+        {
+            ClearFields();
+        }
+        #endregion
+        #region Text Box Double Click Clear
+        // Individual text box fields are cleared when double clicked inside of.
+        private void textBoxName_DoubleClick(object sender, EventArgs e)
+        {
+            textBoxName.Clear();
+        }
 
+        private void textBoxCategory_DoubleClick(object sender, EventArgs e)
+        {
+            textBoxCategory.Clear();
+        }
+
+        private void textBoxStructure_DoubleClick(object sender, EventArgs e)
+        {
+            textBoxStructure.Clear();
+        }
+
+        private void textBoxDefinition_DoubleClick(object sender, EventArgs e)
+        {
+            textBoxDefinition.Clear();
+        }
+        #endregion
+        #region Check Duplicate
+        // Method for checking if data entered already exists in the array. Returns true is duplicate and false if not.
+        private bool CheckIsDuplicate()
+        {
+            bool duplicate = false;
+            for (int i = 0; i < row; i++)
+            {
+                if (string.Equals(wikiArray[i, 0], textBoxName.Text)
+                    && string.Equals(wikiArray[i, 1], textBoxCategory.Text)
+                    && string.Equals(wikiArray[i, 2], textBoxStructure.Text)
+                    && string.Equals(wikiArray[i, 3], textBoxDefinition.Text))
+                {
+                    duplicate = true;
+                    break;
+                }
+                else
+                {
+                    duplicate = false;
+                }
+            }
+            return duplicate;
+        }
+        #endregion
     }
 }
 

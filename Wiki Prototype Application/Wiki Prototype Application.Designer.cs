@@ -110,7 +110,9 @@ namespace Wiki_Prototype_Application
             this.textBoxOne.Name = "textBoxOne";
             this.textBoxOne.Size = new System.Drawing.Size(229, 20);
             this.textBoxOne.TabIndex = 7;
-            this.toolTipOne.SetToolTip(this.textBoxOne, "Enter data you wish to search for here.");
+            this.toolTipOne.SetToolTip(this.textBoxOne, "Enter data you wish to search for here.\r\nDouble clicking here will clear all fiel" +
+        "ds.\r\n");
+            this.textBoxOne.DoubleClick += new System.EventHandler(this.textBoxOne_DoubleClick);
             // 
             // buttonSearch
             // 
@@ -152,6 +154,7 @@ namespace Wiki_Prototype_Application
             this.textBoxName.Size = new System.Drawing.Size(209, 20);
             this.textBoxName.TabIndex = 4;
             this.toolTipOne.SetToolTip(this.textBoxName, "Enter data name here.");
+            this.textBoxName.DoubleClick += new System.EventHandler(this.textBoxName_DoubleClick);
             // 
             // textBoxCategory
             // 
@@ -160,6 +163,7 @@ namespace Wiki_Prototype_Application
             this.textBoxCategory.Size = new System.Drawing.Size(209, 20);
             this.textBoxCategory.TabIndex = 5;
             this.toolTipOne.SetToolTip(this.textBoxCategory, "Enter data category here.");
+            this.textBoxCategory.DoubleClick += new System.EventHandler(this.textBoxCategory_DoubleClick);
             // 
             // textBoxDefinition
             // 
@@ -169,6 +173,7 @@ namespace Wiki_Prototype_Application
             this.textBoxDefinition.Size = new System.Drawing.Size(209, 139);
             this.textBoxDefinition.TabIndex = 7;
             this.toolTipOne.SetToolTip(this.textBoxDefinition, "Enter data definition here.");
+            this.textBoxDefinition.DoubleClick += new System.EventHandler(this.textBoxDefinition_DoubleClick);
             // 
             // textBoxStructure
             // 
@@ -177,6 +182,7 @@ namespace Wiki_Prototype_Application
             this.textBoxStructure.Size = new System.Drawing.Size(209, 20);
             this.textBoxStructure.TabIndex = 6;
             this.toolTipOne.SetToolTip(this.textBoxStructure, "Enter data structure here.");
+            this.textBoxStructure.DoubleClick += new System.EventHandler(this.textBoxStructure_DoubleClick);
             // 
             // label1
             // 
