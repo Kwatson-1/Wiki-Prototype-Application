@@ -43,7 +43,7 @@ namespace Wiki_Prototype_Application
                         wikiArray[counter, 1] = textBoxCategory.Text;
                         wikiArray[counter, 2] = textBoxStructure.Text;
                         wikiArray[counter, 3] = textBoxDefinition.Text;
-                        counter += 1;
+                        counter ++;
                     }
                     else
                     {
@@ -64,6 +64,7 @@ namespace Wiki_Prototype_Application
         #endregion
         // 3) Create a CLEAR method to clear the four text boxes so a new definition can be added.
         #region Method Clear Fields
+        // Method for clearing all text boxes and input text boxes
         public void ClearFields()
         {
             textBoxName.Text = "";
@@ -79,6 +80,7 @@ namespace Wiki_Prototype_Application
         #endregion
         // 4a) Write the code for a Bubble Sort method to sort the 2D array by Name ascending.
         #region Method Sort
+        // Iterates through the array and utilises a comppare ordinal string method to sort it.
         public void BubbleSort()
         {
             for (int x = 0; x < row - 1; x++)
@@ -98,6 +100,7 @@ namespace Wiki_Prototype_Application
         #endregion
         // 4b) Use a separate swap method that passes (by reference) the array element to be swapped (do not use any built-in array methods.
         #region Method Swap
+        // Used for swapping the columns when called by the sort function
         public void Swap(int indx)
         {
             string temp;
@@ -110,10 +113,14 @@ namespace Wiki_Prototype_Application
         }
         #endregion
         /* 
-        5) Write the code for a Binary Search for the Name in the 2D array and display the information in the other textboxes when found.
-           Also, add suitable feedback if the search in not successful and clear the search textbox (do not use any built-in array methods).
-        */
+         * 5) Write the code for a Binary Search for the Name in the 2D array and display the information in the other textboxes when found.
+         * Also, add suitable feedback if the search in not successful and clear the search textbox (do not use any built-in array methods).
+         */
         #region Button Search
+        /* 
+         * Each loop will utilise a string compare method to check the lexical value of the array's middle index name string versus the textbox input string
+         * to determine whether to check the upper or lower bounds or if they are the same. This will repeat until the record is found or out of bounds.
+         */
         private void buttonSearch_Click(object sender, EventArgs e)
         {
 
@@ -131,7 +138,7 @@ namespace Wiki_Prototype_Application
             {
                 int newIndex = (finalIndex + startIndex) / 2;
                 // The string.Compare(a,b) method compares 2 strings a and b and returns an integer value
-                // -1 if a is less than b, 0 if they are equal, 1 if a is higher than b
+                // -1 if a precedes b, 0 if they are equal, 1 if a follows b
                 if (string.Compare(wikiArray[newIndex, 0], textBoxOne.Text) == 0)
                 {
                     foundIndex = newIndex;
@@ -159,8 +166,9 @@ namespace Wiki_Prototype_Application
                 toolStripStatusLabel.Text = "Not found.";
         }
         #endregion
-        // 6) Create a display method that will show the following information in a List box: Name and Category
+        // 6) Create a display method that will show the following information in a List box: Name and Category.
         #region Method Display Array
+        // Creates a new list view item and adds Name, Category, Structure, Definition strings to it before displaying them in the array.
         public void DisplayArray()
         {
             listViewOne.Items.Clear();
@@ -184,20 +192,36 @@ namespace Wiki_Prototype_Application
         private void listViewOne_Click(object sender, EventArgs e)
         {
             int selectedRecord = listViewOne.SelectedIndices[0];
-            textBoxName.Text = wikiArray[selectedRecord, 0];
-            textBoxCategory.Text = wikiArray[selectedRecord, 1];
-            textBoxStructure.Text = wikiArray[selectedRecord, 2];
-            textBoxDefinition.Text = wikiArray[selectedRecord, 3];
+            if (!string.Equals(wikiArray[selectedRecord, 0], "~")
+                && (!string.Equals(wikiArray[selectedRecord, 1], "~")
+                && !string.Equals(wikiArray[selectedRecord, 2], "~")
+                && !string.Equals(wikiArray[selectedRecord, 3], "~")
+                ))
+            {
+                textBoxName.Text = wikiArray[selectedRecord, 0];
+                textBoxCategory.Text = wikiArray[selectedRecord, 1];
+                textBoxStructure.Text = wikiArray[selectedRecord, 2];
+                textBoxDefinition.Text = wikiArray[selectedRecord, 3];
+            }
+            else
+            {
+                textBoxName.Text = "";
+                textBoxCategory.Text = "";
+                textBoxStructure.Text = "";
+                textBoxDefinition.Text = "";
+            }
+
         }
         #endregion
         #region Button Clear
+        // Calls the clear method on clear button click
         private void buttonClear_Click(object sender, EventArgs e)
         {
             ClearFields();
         }
         #endregion
         // Sorts and then displays the array.
-        #region Post Process 
+        #region Post Process Function 
         public void PostProcessFunction()
         {
             BubbleSort();
@@ -205,8 +229,9 @@ namespace Wiki_Prototype_Application
         }
         #endregion
 
-        // 8) Create a SAVE button so the information from the 2D array can be written into a binary file called definitions.dat which is sorted by Name,
+        // 8) Create a SAVE button so the information from the 2D array can be written into a binary file called definitions.dat which is sorted by Name.
         #region Button Save
+        //Creates a new binary writier object for writing items in the array to a stream to be saved to a file called defintions.dat.
         private void ButtonSave_Click(object sender, EventArgs e)
         {
             BinaryWriter bw;
@@ -239,6 +264,7 @@ namespace Wiki_Prototype_Application
         #endregion
         // 9) Create a LOAD button that will read the information from a binary file called definitions.dat into the 2D array.
         #region Button Load
+        // Creates a new binary reader object to read the primitive data from a filestream calle definitions.dat and load them into the array.
         private void ButtonLoad_Click(object sender, EventArgs e)
         {
             BinaryReader br;
@@ -276,6 +302,7 @@ namespace Wiki_Prototype_Application
         #endregion
         // 11) Create an EDIT button that will read the information from the text boxes and write it over an existing record.
         #region Button Edit
+        // 
         private void ButtonEdit_Click(object sender, EventArgs e)
         {
             try
@@ -283,16 +310,30 @@ namespace Wiki_Prototype_Application
                 int selectedRecord = listViewOne.SelectedIndices[0];
                 if (selectedRecord >= 0)
                 {
-                    var result = MessageBox.Show("Proceed with update?", "Edit Record",
-                        MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                    if (result == DialogResult.OK)
+                    if (string.Equals(wikiArray[selectedRecord, 0], textBoxName.Text)
+                        && string.Equals(wikiArray[selectedRecord, 1], textBoxName.Text)
+                        && string.Equals(wikiArray[selectedRecord, 2], textBoxName.Text)
+                        && string.Equals(wikiArray[selectedRecord, 3], textBoxName.Text)
+                        )
                     {
-                        wikiArray[selectedRecord, 0] = textBoxName.Text;
-                        wikiArray[selectedRecord, 1] = textBoxCategory.Text;
-                        wikiArray[selectedRecord, 2] = textBoxStructure.Text;
-                        wikiArray[selectedRecord, 3] = textBoxDefinition.Text;
-                        PostProcessFunction();
+                        var result = MessageBox.Show("Proceed with update?", "Edit Record",
+                        MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                        if (result == DialogResult.OK)
+                        {
+                            wikiArray[selectedRecord, 0] = textBoxName.Text;
+                            wikiArray[selectedRecord, 1] = textBoxCategory.Text;
+                            wikiArray[selectedRecord, 2] = textBoxStructure.Text;
+                            wikiArray[selectedRecord, 3] = textBoxDefinition.Text;
+                            toolStripStatusLabel.Text = "Item edited successfully.";
+                            PostProcessFunction();
+                        }
                     }
+                    else
+                    {
+                        var result = MessageBox.Show("Error: no changes detected");
+                        toolStripStatusLabel.Text = ("Item must have changes before editting.");
+                    }
+                    
                 }
             }
             catch (Exception ex)
@@ -314,7 +355,7 @@ namespace Wiki_Prototype_Application
             try
             {
                 int currentRecord = listViewOne.SelectedIndices[0];
-                if (currentRecord >= 0)
+                if (currentRecord >= 0 && counter > 0 && !string.Equals(wikiArray[currentRecord, 0], "~"))
                 {
                     DialogResult delName = MessageBox.Show("Do you wish to delete this definition?",
                     "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -328,7 +369,6 @@ namespace Wiki_Prototype_Application
                         wikiArray[currentRecord, 3] = ("~");
                         counter--;
                         ClearFields();
-                        //Sort();
                         toolStripStatusLabel1.Text = "Data item deleted.";
                     }
                     else
@@ -375,9 +415,17 @@ namespace Wiki_Prototype_Application
         #endregion
 
         #region Form Load Function
+        // Fills array with symbols consistent with that used when an object is deleted
         private void WikiPrototypeApplication_Load(object sender, EventArgs e)
         {
-            //toolStripStatusLabel.Text = "test load";
+            for (int i = 0; i < row; i++)
+            {
+                for (int j = 0; j < column; j++)
+                {
+                    wikiArray[i, j] = "~";
+                }
+            }
+            PostProcessFunction();
         }
         #endregion
 
