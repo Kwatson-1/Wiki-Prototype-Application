@@ -163,12 +163,15 @@ namespace Wiki_Prototype_Application
                 listViewOne.Items[foundIndex].Selected = true;
                 listViewOne.HideSelection = false;
                 MessageBox.Show("Item found.");
-                toolStripStatusLabel.Text = "Item found at index " + foundIndex;
+                toolStripStatusLabel.Text = "Item found at index " + foundIndex + ".";
             }
             else
+            {
                 MessageBox.Show("Item not found.");
-                toolStripStatusLabel.Text = "Not found.";
+                toolStripStatusLabel.Text = "Item not found.";
                 ClearFields();
+            }
+
         }
         #endregion
         // 6) Create a display method that will show the following information in a List box: Name and Category.
@@ -318,10 +321,10 @@ namespace Wiki_Prototype_Application
                 int selectedRecord = listViewOne.SelectedIndices[0];
                 if (selectedRecord >= 0)
                 {
-                    if (string.Equals(wikiArray[selectedRecord, 0], textBoxName.Text)
-                        && string.Equals(wikiArray[selectedRecord, 1], textBoxCategory.Text)
-                        && string.Equals(wikiArray[selectedRecord, 2], textBoxStructure.Text)
-                        && string.Equals(wikiArray[selectedRecord, 3], textBoxDefinition.Text)
+                    if (!string.Equals(wikiArray[selectedRecord, 0], textBoxName.Text)
+                        || !string.Equals(wikiArray[selectedRecord, 1], textBoxCategory.Text)
+                        || !string.Equals(wikiArray[selectedRecord, 2], textBoxStructure.Text)
+                        || !string.Equals(wikiArray[selectedRecord, 3], textBoxDefinition.Text)
                         )
                     {
                         var result = MessageBox.Show("Proceed with update?", "Edit Record",
@@ -371,7 +374,7 @@ namespace Wiki_Prototype_Application
                     wikiArray[currentRecord, 3] = ("~");
                     counter--;
                     ClearFields();
-                    toolStripStatusLabel1.Text = "Data item deleted.";
+                    toolStripStatusLabel.Text = "Data item deleted.";
                 }
                 else
                 {

@@ -66,7 +66,7 @@ namespace Wiki_Prototype_Application
             this.buttonAdd.Size = new System.Drawing.Size(136, 51);
             this.buttonAdd.TabIndex = 0;
             this.buttonAdd.Text = "Add";
-            this.toolTipOne.SetToolTip(this.buttonAdd, "Adds an item to the array.");
+            this.toolTipOne.SetToolTip(this.buttonAdd, "Adds an item. Requires all fields to be filled out.");
             this.buttonAdd.UseVisualStyleBackColor = true;
             this.buttonAdd.Click += new System.EventHandler(this.ButtonAdd_Click);
             // 
@@ -77,7 +77,8 @@ namespace Wiki_Prototype_Application
             this.buttonEdit.Size = new System.Drawing.Size(136, 51);
             this.buttonEdit.TabIndex = 1;
             this.buttonEdit.Text = "Edit";
-            this.toolTipOne.SetToolTip(this.buttonEdit, "Edits selected item.");
+            this.toolTipOne.SetToolTip(this.buttonEdit, "Edits selected item. Requires at least one \r\ndata field to be different from the " +
+        "original.");
             this.buttonEdit.UseVisualStyleBackColor = true;
             this.buttonEdit.Click += new System.EventHandler(this.ButtonEdit_Click);
             // 
@@ -99,7 +100,7 @@ namespace Wiki_Prototype_Application
             this.buttonSave.Size = new System.Drawing.Size(170, 59);
             this.buttonSave.TabIndex = 11;
             this.buttonSave.Text = "Save";
-            this.toolTipOne.SetToolTip(this.buttonSave, "For saving current data in the application.");
+            this.toolTipOne.SetToolTip(this.buttonSave, "Saves current data to a .dat file.");
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.ButtonSave_Click);
             // 
@@ -118,6 +119,7 @@ namespace Wiki_Prototype_Application
             this.buttonSearch.Size = new System.Drawing.Size(119, 22);
             this.buttonSearch.TabIndex = 8;
             this.buttonSearch.Text = "Search";
+            this.toolTipOne.SetToolTip(this.buttonSearch, "Search for item entered into the input box (case sensitive).");
             this.buttonSearch.UseVisualStyleBackColor = true;
             this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
             // 
@@ -128,7 +130,7 @@ namespace Wiki_Prototype_Application
             this.buttonLoad.Size = new System.Drawing.Size(170, 59);
             this.buttonLoad.TabIndex = 10;
             this.buttonLoad.Text = "Load";
-            this.toolTipOne.SetToolTip(this.buttonLoad, "For loading data into the application.");
+            this.toolTipOne.SetToolTip(this.buttonLoad, "Loads data into the application.");
             this.buttonLoad.UseVisualStyleBackColor = true;
             this.buttonLoad.Click += new System.EventHandler(this.ButtonLoad_Click);
             // 
@@ -263,12 +265,13 @@ namespace Wiki_Prototype_Application
             // buttonLoadData
             // 
             this.buttonLoadData.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.buttonLoadData.Location = new System.Drawing.Point(29, 390);
+            this.buttonLoadData.Location = new System.Drawing.Point(29, 391);
             this.buttonLoadData.Name = "buttonLoadData";
             this.buttonLoadData.Size = new System.Drawing.Size(59, 23);
             this.buttonLoadData.TabIndex = 22;
             this.buttonLoadData.Text = "AutoFill";
             this.buttonLoadData.UseVisualStyleBackColor = true;
+            this.buttonLoadData.Visible = false;
             this.buttonLoadData.Click += new System.EventHandler(this.ButtonLoadData_Click);
             // 
             // WikiPrototypeApplication
