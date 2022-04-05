@@ -29,6 +29,7 @@ namespace Wiki_Prototype_Application
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
@@ -52,7 +53,10 @@ namespace Wiki_Prototype_Application
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.buttonLoadData = new System.Windows.Forms.Button();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.toolTipOne = new System.Windows.Forms.ToolTip(this.components);
             this.statusStripOne.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonAdd
@@ -62,6 +66,7 @@ namespace Wiki_Prototype_Application
             this.buttonAdd.Size = new System.Drawing.Size(136, 51);
             this.buttonAdd.TabIndex = 0;
             this.buttonAdd.Text = "Add";
+            this.toolTipOne.SetToolTip(this.buttonAdd, "Adds an item to the array.");
             this.buttonAdd.UseVisualStyleBackColor = true;
             this.buttonAdd.Click += new System.EventHandler(this.ButtonAdd_Click);
             // 
@@ -72,6 +77,7 @@ namespace Wiki_Prototype_Application
             this.buttonEdit.Size = new System.Drawing.Size(136, 51);
             this.buttonEdit.TabIndex = 1;
             this.buttonEdit.Text = "Edit";
+            this.toolTipOne.SetToolTip(this.buttonEdit, "Edits selected item.");
             this.buttonEdit.UseVisualStyleBackColor = true;
             this.buttonEdit.Click += new System.EventHandler(this.ButtonEdit_Click);
             // 
@@ -82,6 +88,7 @@ namespace Wiki_Prototype_Application
             this.buttonDelete.Size = new System.Drawing.Size(136, 51);
             this.buttonDelete.TabIndex = 2;
             this.buttonDelete.Text = "Delete";
+            this.toolTipOne.SetToolTip(this.buttonDelete, "Deletes selected item.");
             this.buttonDelete.UseVisualStyleBackColor = true;
             this.buttonDelete.Click += new System.EventHandler(this.ButtonDelete_Click);
             // 
@@ -92,6 +99,7 @@ namespace Wiki_Prototype_Application
             this.buttonSave.Size = new System.Drawing.Size(170, 59);
             this.buttonSave.TabIndex = 11;
             this.buttonSave.Text = "Save";
+            this.toolTipOne.SetToolTip(this.buttonSave, "For saving current data in the application.");
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.ButtonSave_Click);
             // 
@@ -101,6 +109,7 @@ namespace Wiki_Prototype_Application
             this.textBoxOne.Name = "textBoxOne";
             this.textBoxOne.Size = new System.Drawing.Size(229, 20);
             this.textBoxOne.TabIndex = 7;
+            this.toolTipOne.SetToolTip(this.textBoxOne, "Enter data you wish to search for here.");
             // 
             // buttonSearch
             // 
@@ -119,6 +128,7 @@ namespace Wiki_Prototype_Application
             this.buttonLoad.Size = new System.Drawing.Size(170, 59);
             this.buttonLoad.TabIndex = 10;
             this.buttonLoad.Text = "Load";
+            this.toolTipOne.SetToolTip(this.buttonLoad, "For loading data into the application.");
             this.buttonLoad.UseVisualStyleBackColor = true;
             this.buttonLoad.Click += new System.EventHandler(this.ButtonLoad_Click);
             // 
@@ -129,6 +139,7 @@ namespace Wiki_Prototype_Application
             this.buttonClear.Size = new System.Drawing.Size(136, 51);
             this.buttonClear.TabIndex = 3;
             this.buttonClear.Text = "Clear";
+            this.toolTipOne.SetToolTip(this.buttonClear, "Clears all fields.");
             this.buttonClear.UseVisualStyleBackColor = true;
             this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
             // 
@@ -138,6 +149,7 @@ namespace Wiki_Prototype_Application
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(209, 20);
             this.textBoxName.TabIndex = 4;
+            this.toolTipOne.SetToolTip(this.textBoxName, "Enter data name here.");
             // 
             // textBoxCategory
             // 
@@ -145,6 +157,7 @@ namespace Wiki_Prototype_Application
             this.textBoxCategory.Name = "textBoxCategory";
             this.textBoxCategory.Size = new System.Drawing.Size(209, 20);
             this.textBoxCategory.TabIndex = 5;
+            this.toolTipOne.SetToolTip(this.textBoxCategory, "Enter data category here.");
             // 
             // textBoxDefinition
             // 
@@ -153,6 +166,7 @@ namespace Wiki_Prototype_Application
             this.textBoxDefinition.Name = "textBoxDefinition";
             this.textBoxDefinition.Size = new System.Drawing.Size(209, 139);
             this.textBoxDefinition.TabIndex = 7;
+            this.toolTipOne.SetToolTip(this.textBoxDefinition, "Enter data definition here.");
             // 
             // textBoxStructure
             // 
@@ -160,6 +174,7 @@ namespace Wiki_Prototype_Application
             this.textBoxStructure.Name = "textBoxStructure";
             this.textBoxStructure.Size = new System.Drawing.Size(209, 20);
             this.textBoxStructure.TabIndex = 6;
+            this.toolTipOne.SetToolTip(this.textBoxStructure, "Enter data structure here.");
             // 
             // label1
             // 
@@ -204,6 +219,7 @@ namespace Wiki_Prototype_Application
             this.columnName,
             this.columnCategory});
             this.listViewOne.FullRowSelect = true;
+            this.listViewOne.HideSelection = false;
             this.listViewOne.Location = new System.Drawing.Point(329, 63);
             this.listViewOne.Name = "listViewOne";
             this.listViewOne.Size = new System.Drawing.Size(354, 275);
@@ -211,6 +227,7 @@ namespace Wiki_Prototype_Application
             this.listViewOne.UseCompatibleStateImageBehavior = false;
             this.listViewOne.View = System.Windows.Forms.View.Details;
             this.listViewOne.Click += new System.EventHandler(this.listViewOne_Click);
+            this.listViewOne.DoubleClick += new System.EventHandler(this.ListViewOne_DoubleClick);
             // 
             // columnName
             // 
@@ -283,6 +300,7 @@ namespace Wiki_Prototype_Application
             this.Load += new System.EventHandler(this.WikiPrototypeApplication_Load);
             this.statusStripOne.ResumeLayout(false);
             this.statusStripOne.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -313,6 +331,8 @@ namespace Wiki_Prototype_Application
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
         private System.Windows.Forms.Button buttonLoadData;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.BindingSource bindingSource1;
+        private System.Windows.Forms.ToolTip toolTipOne;
     }
 }
 

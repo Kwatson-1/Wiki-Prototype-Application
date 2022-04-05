@@ -43,7 +43,8 @@ namespace Wiki_Prototype_Application
                         wikiArray[counter, 1] = textBoxCategory.Text;
                         wikiArray[counter, 2] = textBoxStructure.Text;
                         wikiArray[counter, 3] = textBoxDefinition.Text;
-                        counter ++;
+                        counter++;
+                        ClearFields();
                     }
                     else
                     {
@@ -161,9 +162,13 @@ namespace Wiki_Prototype_Application
                 textBoxDefinition.Text = wikiArray[foundIndex, 3];
                 listViewOne.Items[foundIndex].Selected = true;
                 listViewOne.HideSelection = false;
+                MessageBox.Show("Item found.");
+                toolStripStatusLabel.Text = "Item found at index " + foundIndex;
             }
             else
+                MessageBox.Show("Item not found.");
                 toolStripStatusLabel.Text = "Not found.";
+                ClearFields();
         }
         #endregion
         // 6) Create a display method that will show the following information in a List box: Name and Category.
@@ -253,6 +258,7 @@ namespace Wiki_Prototype_Application
                     bw.Write(wikiArray[i, 2]);
                     bw.Write(wikiArray[i, 3]);
                 }
+                toolStripStatusLabel.Text = "File saved successfully.";
             }
             catch (Exception fe)
             {
@@ -288,7 +294,9 @@ namespace Wiki_Prototype_Application
                     wikiArray[x, 2] = br.ReadString();
                     wikiArray[x, 3] = br.ReadString();
                     x++;
+                    toolStripStatusLabel.Text = "File loaded successfully.";
                 }
+
                 catch (Exception fe)
                 {
                     MessageBox.Show("Cannot read data from file or EOF" + fe);
@@ -311,9 +319,9 @@ namespace Wiki_Prototype_Application
                 if (selectedRecord >= 0)
                 {
                     if (string.Equals(wikiArray[selectedRecord, 0], textBoxName.Text)
-                        && string.Equals(wikiArray[selectedRecord, 1], textBoxName.Text)
-                        && string.Equals(wikiArray[selectedRecord, 2], textBoxName.Text)
-                        && string.Equals(wikiArray[selectedRecord, 3], textBoxName.Text)
+                        && string.Equals(wikiArray[selectedRecord, 1], textBoxCategory.Text)
+                        && string.Equals(wikiArray[selectedRecord, 2], textBoxStructure.Text)
+                        && string.Equals(wikiArray[selectedRecord, 3], textBoxDefinition.Text)
                         )
                     {
                         var result = MessageBox.Show("Proceed with update?", "Edit Record",
@@ -333,7 +341,7 @@ namespace Wiki_Prototype_Application
                         var result = MessageBox.Show("Error: no changes detected");
                         toolStripStatusLabel.Text = ("Item must have changes before editting.");
                     }
-                    
+
                 }
             }
             catch (Exception ex)
@@ -345,7 +353,41 @@ namespace Wiki_Prototype_Application
         }
         #endregion
         // 12) Create a DELETE button that will remove elements from the array.
-        #region Delete Button
+        #region Method Delete
+        private void DeleteMethod()
+        {
+            int currentRecord = listViewOne.SelectedIndices[0];
+            if (currentRecord >= 0 && counter > 0 && !string.Equals(wikiArray[currentRecord, 0], "~"))
+            {
+                DialogResult delName = MessageBox.Show("Do you wish to delete this definition?",
+                "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (delName == DialogResult.Yes)
+                {
+                    ListViewItem lvi = new ListViewItem(wikiArray[currentRecord, 0]);
+                    wikiArray[currentRecord, 0] = ("~");
+                    wikiArray[currentRecord, 1] = ("~");
+                    wikiArray[currentRecord, 2] = ("~");
+                    wikiArray[currentRecord, 3] = ("~");
+                    counter--;
+                    ClearFields();
+                    toolStripStatusLabel1.Text = "Data item deleted.";
+                }
+                else
+                {
+                    MessageBox.Show("Item NOT Deleted", "Delete Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+        #endregion
+        #region Method Double-Click Delete
+        private void ListViewOne_DoubleClick(object sender, EventArgs e)
+        {
+            DeleteMethod();
+            PostProcessFunction();
+        }
+        #endregion
+        #region Button Delete
         // Delete button method
         // Deletes the item at the selected index and shuffles the array up to fill it
         // Method ensures blank elements are shuffled to the end of the array
@@ -354,38 +396,15 @@ namespace Wiki_Prototype_Application
 
             try
             {
-                int currentRecord = listViewOne.SelectedIndices[0];
-                if (currentRecord >= 0 && counter > 0 && !string.Equals(wikiArray[currentRecord, 0], "~"))
-                {
-                    DialogResult delName = MessageBox.Show("Do you wish to delete this definition?",
-                    "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                    if (delName == DialogResult.Yes)
-                    {
-                        ListViewItem lvi = new ListViewItem(wikiArray[currentRecord, 0]);
-                        wikiArray[currentRecord, 0] = ("~");
-                        wikiArray[currentRecord, 1] = ("~");
-                        wikiArray[currentRecord, 2] = ("~");
-                        wikiArray[currentRecord, 3] = ("~");
-                        counter--;
-                        ClearFields();
-                        toolStripStatusLabel1.Text = "Data item deleted.";
-                    }
-                    else
-                    {
-                        MessageBox.Show("Item NOT Deleted", "Delete Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
+                DeleteMethod();
             }
             catch (ArgumentOutOfRangeException)
             {
                 MessageBox.Show("Select an item to delete.");
             }
-            BubbleSort();
-            DisplayArray();
+            PostProcessFunction();
         }
         #endregion
-
         // Preloads data so for testing and demonstration purposes.
         #region Data partial preload
         private void ButtonLoadData_Click(object sender, EventArgs e)
@@ -413,7 +432,6 @@ namespace Wiki_Prototype_Application
             PostProcessFunction();
         }
         #endregion
-
         #region Form Load Function
         // Fills array with symbols consistent with that used when an object is deleted
         private void WikiPrototypeApplication_Load(object sender, EventArgs e)
