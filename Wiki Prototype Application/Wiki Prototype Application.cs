@@ -11,6 +11,10 @@ using System.Runtime;
 using System.IO;
 
 namespace Wiki_Prototype_Application
+// Developer: Kyle Watson
+// Start Date: 2/08/2022
+// Submssion date: 5/04/2022
+// A wiki prototype application for storing names, categories, structures and definitions for data structures
 {
     public partial class WikiPrototypeApplication : Form
     {
@@ -132,7 +136,7 @@ namespace Wiki_Prototype_Application
          * Each loop will utilise a string compare method to check the lexical value of the array's middle index name string versus the textbox input string
          * to determine whether to check the upper or lower bounds or if they are the same. This will repeat until the record is found or out of bounds.
          */
-        private void buttonSearch_Click(object sender, EventArgs e)
+        private void ButtonSearch_Click(object sender, EventArgs e)
         {
 
             int startIndex = -1;
@@ -144,43 +148,51 @@ namespace Wiki_Prototype_Application
             {
                 listViewOne.SelectedItems[0].Selected = false;
             }
-
-            while (!flag && !((finalIndex - startIndex) <= 1))
+            if (!string.IsNullOrEmpty(textBoxOne.Text))
             {
-                int newIndex = (finalIndex + startIndex) / 2;
-                // The string.Compare(a,b) method compares 2 strings a and b and returns an integer value
-                // -1 if a precedes b, 0 if they are equal, 1 if a follows b
-                if (string.Compare(wikiArray[newIndex, 0], textBoxOne.Text) == 0)
+                while (!flag && !((finalIndex - startIndex) <= 1))
                 {
-                    foundIndex = newIndex;
-                    flag = true;
-                    break;
+                    int newIndex = (finalIndex + startIndex) / 2;
+                    // The string.Compare(a,b) method compares 2 strings a and b and returns an integer value
+                    // -1 if a precedes b, 0 if they are equal, 1 if a follows b
+                    if (string.Compare(wikiArray[newIndex, 0], textBoxOne.Text) == 0)
+                    {
+                        foundIndex = newIndex;
+                        flag = true;
+                        break;
+                    }
+                    else
+                    {
+                        if (string.Compare(wikiArray[newIndex, 0], textBoxOne.Text) == 1)
+                            finalIndex = newIndex;
+                        else
+                            startIndex = newIndex;
+                    }
+                }
+                if (flag)
+                {
+                    textBoxName.Text = wikiArray[foundIndex, 0];
+                    textBoxCategory.Text = wikiArray[foundIndex, 1];
+                    textBoxStructure.Text = wikiArray[foundIndex, 2];
+                    textBoxDefinition.Text = wikiArray[foundIndex, 3];
+                    listViewOne.Items[foundIndex].Selected = true;
+                    listViewOne.HideSelection = false;
+                    MessageBox.Show("Item found.");
+                    toolStripStatusLabel.Text = "Item found at index " + foundIndex + ".";
                 }
                 else
                 {
-                    if (string.Compare(wikiArray[newIndex, 0], textBoxOne.Text) == 1)
-                        finalIndex = newIndex;
-                    else
-                        startIndex = newIndex;
+                    MessageBox.Show("Item not found.");
+                    toolStripStatusLabel.Text = "Item not found.";
+                    ClearFields();
                 }
-            }
-            if (flag)
-            {
-                textBoxName.Text = wikiArray[foundIndex, 0];
-                textBoxCategory.Text = wikiArray[foundIndex, 1];
-                textBoxStructure.Text = wikiArray[foundIndex, 2];
-                textBoxDefinition.Text = wikiArray[foundIndex, 3];
-                listViewOne.Items[foundIndex].Selected = true;
-                listViewOne.HideSelection = false;
-                MessageBox.Show("Item found.");
-                toolStripStatusLabel.Text = "Item found at index " + foundIndex + ".";
             }
             else
             {
-                MessageBox.Show("Item not found.");
-                toolStripStatusLabel.Text = "Item not found.";
-                ClearFields();
+                MessageBox.Show("Please enter a valid item to search for.");
+                toolStripStatusLabel.Text = "Error: input text box cannot be blank.";
             }
+            
 
         }
         #endregion
@@ -337,17 +349,28 @@ namespace Wiki_Prototype_Application
                         || !string.Equals(wikiArray[selectedRecord, 3], textBoxDefinition.Text)
                         )
                     {
-                        var result = MessageBox.Show("Proceed with update?", "Edit Record",
-                        MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                        if (result == DialogResult.OK)
+                        if (!string.IsNullOrWhiteSpace(textBoxName.Text) &&
+                !string.IsNullOrWhiteSpace(textBoxCategory.Text) &&
+                !string.IsNullOrWhiteSpace(textBoxStructure.Text) &&
+                !string.IsNullOrWhiteSpace(textBoxDefinition.Text))
                         {
-                            wikiArray[selectedRecord, 0] = textBoxName.Text;
-                            wikiArray[selectedRecord, 1] = textBoxCategory.Text;
-                            wikiArray[selectedRecord, 2] = textBoxStructure.Text;
-                            wikiArray[selectedRecord, 3] = textBoxDefinition.Text;
-                            toolStripStatusLabel.Text = "Item edited successfully.";
-                            PostProcessFunction();
+                            var result = MessageBox.Show("Proceed with update?", "Edit Record",
+                            MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                            if (result == DialogResult.OK)
+                            {
+                                wikiArray[selectedRecord, 0] = textBoxName.Text;
+                                wikiArray[selectedRecord, 1] = textBoxCategory.Text;
+                                wikiArray[selectedRecord, 2] = textBoxStructure.Text;
+                                wikiArray[selectedRecord, 3] = textBoxDefinition.Text;
+                                toolStripStatusLabel.Text = "Item edited successfully.";
+                                PostProcessFunction();
+                            }
                         }
+                        else
+                        {
+                            toolStripStatusLabel.Text = "Error: please fill out all fields.";
+                        }
+
                     }
                     else
                     {
@@ -360,6 +383,7 @@ namespace Wiki_Prototype_Application
             catch (Exception ex)
             {
                 toolStripStatusLabel.Text = "Error: please select a valid item.";
+                MessageBox.Show("Please select an item to edit.");
                 Console.WriteLine(ex);
             }
 
@@ -415,7 +439,8 @@ namespace Wiki_Prototype_Application
             }
             catch (ArgumentOutOfRangeException)
             {
-                MessageBox.Show("Select an item to delete.");
+                MessageBox.Show("Please select an item to delete.");
+                toolStripStatusLabel.Text = "Error: please select a valid item.";
             }
             PostProcessFunction();
         }

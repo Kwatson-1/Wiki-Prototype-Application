@@ -123,7 +123,7 @@ namespace Wiki_Prototype_Application
             this.buttonSearch.Text = "Search";
             this.toolTipOne.SetToolTip(this.buttonSearch, "Search for item entered into the input box (case sensitive).");
             this.buttonSearch.UseVisualStyleBackColor = true;
-            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
+            this.buttonSearch.Click += new System.EventHandler(this.ButtonSearch_Click);
             // 
             // buttonLoad
             // 
