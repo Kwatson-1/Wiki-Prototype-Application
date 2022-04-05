@@ -468,7 +468,7 @@ namespace Wiki_Prototype_Application
             ClearFields();
         }
         #endregion
-        #region Text Box Double Click Clear
+        #region Method Text Box Double Click Clear
         // Individual text box fields are cleared when double clicked inside of.
         private void textBoxName_DoubleClick(object sender, EventArgs e)
         {
@@ -490,7 +490,7 @@ namespace Wiki_Prototype_Application
             textBoxDefinition.Clear();
         }
         #endregion
-        #region Check Duplicate
+        #region Method Check Duplicate
         // Method for checking if data entered already exists in the array. Returns true is duplicate and false if not.
         private bool CheckIsDuplicate()
         {
